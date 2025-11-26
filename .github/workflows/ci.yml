@@ -13,7 +13,32 @@ jobs:
           node-version: '20'
       - name: Install deps
         run: npm install --legacy-peer-deps
-      - run: npm yarn install
+      - run: npm install yarn@latest -g
       - name: ESLint
-        run: npm run lint
+        run: yarn lint
+      - name: Prettier
+        run: yarn prettier:check
 
+  functional-tests:
+    runs-on: ubuntu-latest
+    needs: lint
+    strategy:
+      matrix:
+        group:
+          - name: "UI Tests"
+            specs: |
+              cypress/tests/ui/*.spec.ts
+              cypress/tests/ui-auth-providers/*.spec.ts
+          - name: "API Tests"
+            specs: "cypress/tests/api/*.spec.ts"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm install --legacy-peer-deps
+      - run: npm install yarn@latest -g
+      - name: Run Functional Tests - ${{ matrix.group.name }}
+        run: |
+            npx cypress run --spec "${{ matrix.group.specs }}"
