@@ -48,6 +48,16 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Build Application
+        run: yarn build
+        env:
+            NODE_ENV: production
+
+      - name: Start Application
+        run: yarn start &
+        env:
+            NODE_ENV: production
+
       - name: Run Functional Tests - ${{ matrix.group.name }}
         run: |
           npx cypress run --spec "${{ matrix.group.specs }}"
