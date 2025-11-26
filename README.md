@@ -1,3 +1,11 @@
+**Cette application est une version modifiée de l'application de référence**
+**[cypress-realworld-app](https://github.com/cypress-io/cypress-realworld-app).**
+**Elle fait partie intégrale du cours CI/CD EADL réalisé par Pierre Poujade.**
+**La réutilisation de ce TP ou de ce cours ne peut se faire sans la permission**
+**expresse de l'auteur ([Pierre Poujade](https://64b.it/say_hi)).**
+
+---
+
 <p align="center">
   <!-- We use two SVGs here so that this displays correctly
     on Github. This might not look right in other Markdown previewers. -->
