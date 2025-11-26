@@ -1,4 +1,4 @@
-import { body, check, oneOf, query, sanitizeQuery } from "express-validator";
+import { body, check, oneOf, query } from "express-validator";
 import { isValid } from "shortid";
 import {
   TransactionStatus,
@@ -7,6 +7,7 @@ import {
   NotificationsType,
 } from "../src/models";
 import { includes } from "lodash/fp";
+import Query from "./graphql/resolvers/Query";
 
 const TransactionStatusValues = Object.values(TransactionStatus);
 const RequestStatusValues = Object.values(TransactionRequestStatus);
@@ -50,7 +51,7 @@ export const isUserValidator = [
     .isIn(["public", "private", "contacts"]),
 ];
 
-export const sanitizeTransactionStatus = sanitizeQuery("status").customSanitizer((value) => {
+export const sanitizeTransactionStatus = query("status").customSanitizer((value) => {
   /* istanbul ignore if*/
   if (includes(value, TransactionStatusValues)) {
     return value;
@@ -59,7 +60,7 @@ export const sanitizeTransactionStatus = sanitizeQuery("status").customSanitizer
 });
 
 // default request status to undefined if not provided
-export const sanitizeRequestStatus = sanitizeQuery("requestStatus").customSanitizer((value) => {
+export const sanitizeRequestStatus = query("requestStatus").customSanitizer((value) => {
   /* istanbul ignore if*/
   if (includes(value, RequestStatusValues)) {
     return value;
