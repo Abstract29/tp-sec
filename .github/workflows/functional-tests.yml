@@ -57,6 +57,6 @@ jobs:
           NODE_ENV: production
 
       - name: Run Functional Tests - ${{ matrix.group.name }}
-        run: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v6
         with:
           spec: ${{ matrix.group.specs }}
