@@ -49,12 +49,12 @@ jobs:
       - name: Build Application
         run: yarn build
         env:
-            NODE_ENV: production
+          NODE_ENV: production
 
       - name: Start Application
         run: yarn start &
         env:
-            NODE_ENV: production
+          NODE_ENV: production
 
       - name: Run Functional Tests - ${{ matrix.group.name }}
         run: cypress-io/github-action@v6
